@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { addEntry } from './data';
+import { type UnsavedEntry } from './data';
 
 export function Entry() {
   const [title, setEntryTitle] = useState('');
-  const [photoURL, setEntryPhotoURL] = useState('');
-  const [entryNotes, setEntryNotes] = useState('');
+  const [photoUrl, setEntryPhotoURL] = useState('');
+  const [notes, setEntryNotes] = useState('');
 
   function handleSave() {
-    console.log(title, photoURL, entryNotes);
+    console.log(title, photoUrl, notes);
+    const newEntry: UnsavedEntry = { title, photoUrl, notes };
+    addEntry(newEntry);
   }
 
   return (
@@ -26,14 +30,14 @@ export function Entry() {
           <label>Photo URL</label>
           <input
             type="text"
-            value={photoURL}
+            value={photoUrl}
             onChange={(event) => setEntryPhotoURL(event.target.value)}></input>
         </div>
         <div>
           <label>Notes</label>
           <input
             type="notes"
-            value={entryNotes}
+            value={notes}
             onChange={(event) => setEntryNotes(event.target.value)}></input>
         </div>
         <div>

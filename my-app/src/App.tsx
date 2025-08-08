@@ -1,7 +1,8 @@
 import './App.css';
 import { Header } from './Header';
 import { Entry } from './Entry';
-// import { type UnsavedEntry } from './data';
+import { Routes, Route } from 'react-router-dom';
+import { Lists } from './Lists';
 
 // type UnsavedEntry = {
 //   title: string;
@@ -12,8 +13,12 @@ import { Entry } from './Entry';
 function App() {
   return (
     <>
-      <Header />
-      <Entry />
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Lists />} />
+          <Route path="/entry" element={<Entry />} />
+        </Route>
+      </Routes>
     </>
   );
 }
