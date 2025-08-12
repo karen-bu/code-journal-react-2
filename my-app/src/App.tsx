@@ -4,12 +4,6 @@ import { Entry } from './Entry';
 import { Routes, Route } from 'react-router-dom';
 import { Lists } from './Lists';
 
-// type UnsavedEntry = {
-//   title: string;
-//   notes: string;
-//   photoUrl: string;
-// };
-
 function App() {
   return (
     <>

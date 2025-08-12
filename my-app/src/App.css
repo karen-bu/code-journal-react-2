@@ -1,7 +1,17 @@
-.journal-header {
+.journal-header,
+.journal-header a {
   background-color: purple;
   color: white;
   height: 60px;
+  display: flex;
+  justify-content: first baseline;
+  align-items: center;
+  text-underline-offset: 8px;
+}
+
+.header-link a {
+  color: white;
+  margin-left: 20px;
 }
 
 .column-50 {
@@ -12,6 +22,10 @@
   display: flex;
 
   /* align-items: left; */
+}
+
+.entry-holder {
+  display: flex;
 }
 
 .entry-img {
@@ -25,4 +39,19 @@
 .entry-img img {
   max-height: 300px;
   max-width: 300px;
+}
+
+.entrylist-img {
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+}
+
+.edit-icon {
+  margin: 20px;
+}
+
+.entrytitle {
+  display: flex;
+  align-items: center;
 }
