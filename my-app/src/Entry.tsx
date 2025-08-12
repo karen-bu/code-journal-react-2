@@ -7,6 +7,7 @@ import {
   type UnsavedEntry,
 } from './data';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Delete } from './Delete';
 
 export function Entry() {
   const [title, setEntryTitle] = useState('');
@@ -46,11 +47,13 @@ export function Entry() {
     navigation('/');
   }
 
+  const placeholder = '../public/placeholder-image-square.jpg';
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="entry-container">
         <div className="entry-img column-50">
-          <img src="../public/placeholder-image-square.jpg" />
+          <img src={photoUrl || placeholder} />
         </div>
         <div className="entry-text column-50">
           <div className="entry-title">
@@ -78,6 +81,7 @@ export function Entry() {
           </div>
           <div>
             <button type="submit">Save</button>
+            {entryId !== 'new' && entryId && <Delete id={+entryId} />}
           </div>
         </div>
       </div>

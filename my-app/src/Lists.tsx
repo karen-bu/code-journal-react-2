@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { type Entry, readEntries } from './data';
 import { FaRegEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Delete } from './Delete';
 
 export function Lists() {
   const [error, setError] = useState<unknown>();
@@ -52,6 +53,7 @@ export function Lists() {
             <Link to={`/entry/${entry.entryId}`}>
               <FaRegEdit className="edit-icon" />
             </Link>
+            <Delete id={entry.entryId} />
           </div>
         </div>
         <div>
