@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { type Entry, readEntries } from './data';
 import { FaRegEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export function Lists() {
   const [error, setError] = useState<unknown>();
@@ -48,7 +49,9 @@ export function Lists() {
         <div className="entrytitle">
           <h2>{entry.title}</h2>
           <div>
-            <FaRegEdit className="edit-icon" />
+            <Link to={`/entry/${entry.entryId}`}>
+              <FaRegEdit className="edit-icon" />
+            </Link>
           </div>
         </div>
         <div>

@@ -1,12 +1,19 @@
-import { useState, useEffect } from 'react';
-import { addEntry, readEntry, type Entry, type UnsavedEntry } from './data';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, type FormEvent } from 'react';
+import {
+  addEntry,
+  readEntry,
+  updateEntry,
+  type Entry,
+  type UnsavedEntry,
+} from './data';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export function Entry() {
   const [title, setEntryTitle] = useState('');
   const [photoUrl, setEntryPhotoURL] = useState('');
   const [notes, setEntryNotes] = useState('');
   const { entryId } = useParams();
+  const navigation = useNavigate();
 
   useEffect(() => {
     async function loadEntry(entryId: number) {
@@ -24,44 +31,56 @@ export function Entry() {
   }, [entryId]);
 
   function handleSave() {
-    console.log(title, photoUrl, notes);
     const newEntry: UnsavedEntry = { title, photoUrl, notes };
     addEntry(newEntry);
   }
 
-  /* function updateEntry({ entryId }: Entry) {} */
+  function handleSubmit(event: FormEvent) {
+    event?.preventDefault();
+    if (entryId !== 'new' && entryId) {
+      const updatedEntry: Entry = { title, photoUrl, notes, entryId: +entryId };
+      updateEntry(updatedEntry);
+    } else {
+      handleSave();
+    }
+    navigation('/');
+  }
 
   return (
-    <div className="entry-container">
-      <div className="entry-img column-50">
-        <img src="../public/placeholder-image-square.jpg" />
+    <form onSubmit={handleSubmit}>
+      <div className="entry-container">
+        <div className="entry-img column-50">
+          <img src="../public/placeholder-image-square.jpg" />
+        </div>
+        <div className="entry-text column-50">
+          <div className="entry-title">
+            <label>Title</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(event) => setEntryTitle(event.target.value)}></input>
+          </div>
+          <div>
+            <label>Photo URL</label>
+            <input
+              type="text"
+              value={photoUrl}
+              onChange={(event) =>
+                setEntryPhotoURL(event.target.value)
+              }></input>
+          </div>
+          <div>
+            <label>Notes</label>
+            <input
+              type="notes"
+              value={notes}
+              onChange={(event) => setEntryNotes(event.target.value)}></input>
+          </div>
+          <div>
+            <button type="submit">Save</button>
+          </div>
+        </div>
       </div>
-      <div className="entry-text column-50">
-        <div className="entry-title">
-          <label>Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(event) => setEntryTitle(event.target.value)}></input>
-        </div>
-        <div>
-          <label>Photo URL</label>
-          <input
-            type="text"
-            value={photoUrl}
-            onChange={(event) => setEntryPhotoURL(event.target.value)}></input>
-        </div>
-        <div>
-          <label>Notes</label>
-          <input
-            type="notes"
-            value={notes}
-            onChange={(event) => setEntryNotes(event.target.value)}></input>
-        </div>
-        <div>
-          <button onClick={handleSave}>Save</button>
-        </div>
-      </div>
-    </div>
+    </form>
   );
 }
