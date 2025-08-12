@@ -1,0 +1,57 @@
+.journal-header,
+.journal-header a {
+  background-color: purple;
+  color: white;
+  height: 60px;
+  display: flex;
+  justify-content: first baseline;
+  align-items: center;
+  text-underline-offset: 8px;
+}
+
+.header-link a {
+  color: white;
+  margin-left: 20px;
+}
+
+.column-50 {
+  width: 50%;
+}
+
+.entry-container {
+  display: flex;
+
+  /* align-items: left; */
+}
+
+.entry-holder {
+  display: flex;
+}
+
+.entry-img {
+  margin: 40px;
+}
+
+.entry-text {
+  margin: 40px;
+}
+
+.entry-img img {
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.entrylist-img {
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+}
+
+.edit-icon {
+  margin: 20px;
+}
+
+.entrytitle {
+  display: flex;
+  align-items: center;
+}
