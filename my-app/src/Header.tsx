@@ -9,7 +9,7 @@ export function Header() {
         </h1>
         <div className="header-link">
           <h3>
-            <Link to="/entry">New Entry</Link>
+            <Link to="/entry/new">New Entry</Link>
           </h3>
         </div>
       </div>

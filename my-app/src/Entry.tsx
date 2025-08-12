@@ -1,17 +1,35 @@
-import { useState } from 'react';
-import { addEntry } from './data';
-import { type UnsavedEntry } from './data';
+import { useState, useEffect } from 'react';
+import { addEntry, readEntry, type Entry, type UnsavedEntry } from './data';
+import { useParams } from 'react-router-dom';
 
 export function Entry() {
   const [title, setEntryTitle] = useState('');
   const [photoUrl, setEntryPhotoURL] = useState('');
   const [notes, setEntryNotes] = useState('');
+  const { entryId } = useParams();
+
+  useEffect(() => {
+    async function loadEntry(entryId: number) {
+      try {
+        const item = await readEntry(entryId);
+        if (!item) throw Error('item not found');
+        setEntryTitle(item.title);
+        setEntryPhotoURL(item.photoUrl);
+        setEntryNotes(item.notes);
+      } catch (error) {
+        alert(error);
+      }
+    }
+    if (entryId !== 'new' && entryId) loadEntry(+entryId);
+  }, [entryId]);
 
   function handleSave() {
     console.log(title, photoUrl, notes);
     const newEntry: UnsavedEntry = { title, photoUrl, notes };
     addEntry(newEntry);
   }
+
+  /* function updateEntry({ entryId }: Entry) {} */
 
   return (
     <div className="entry-container">
